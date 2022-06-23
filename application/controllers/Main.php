@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Main extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,8 +18,22 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->loadView(null, null);
 	}
+
+	public function setting_page() {
+		$class=$this->uri->segment(1);
+		$method=$this->uri->segment(2);
+
+		if (@is_file(VIEWPATH."/".$class."/".$method.'.php')) {
+			$this->loadView(null, null);
+		} else {
+			$this->load404();
+		}
+		
+	}
+
 }
