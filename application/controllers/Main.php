@@ -19,8 +19,7 @@ class Main extends MY_Controller {
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
 
-	public function index()
-	{
+	public function index() {
 		$this->loadView(null, null);
 	}
 
