@@ -1,4 +1,4 @@
-<div class="form-signin w-100 text-center">
+<div class="m-auto form-signin w-100 text-center">
   <form>
     <h1 class="h3 mb-3 fw-normal">로그인</h1>
 

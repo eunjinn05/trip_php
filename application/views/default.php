@@ -16,8 +16,8 @@
 		<script src="/assets/common.js"></script>
 
 		<!-- 추가 css -->
-		<? if (@is_file(ASSETSPATH."/".$fetch_method.".css")): ?>
-			<link href="/<?=ASSETSPATH.'/'.$fetch_method?>.css" rel="stylesheet">
+		<? if (@is_file(ASSETSPATH."/".$fetch_class."/".$fetch_method.".css")): ?>
+			<link href="/<?=ASSETSPATH."/".$fetch_class.'/'.$fetch_method?>.css" rel="stylesheet">
 		<?endif;?>
 
 	</head>
@@ -50,7 +50,7 @@
 			</div>
 		</header>
 
-		<div class=" m-auto">
+		<div class="defaultdiv">
 			<? include $fetch_views;?>
 
 			<? if (@is_file(VIEWPATH."/footer.php")) :
@@ -58,8 +58,15 @@
 			endif; ?>
 		</div>
 	<!-- 추가 js -->
-	<? if (@is_file(ASSETSPATH."/".$fetch_method.".js")): ?>
-		<script src="<?=ASSETSPATH.'/'.$fetch_method?>.js"></script>
+	<? if (@is_file(ASSETSPATH."/".$fetch_class."/".$fetch_class.".js")): ?>
+		<script src="/<?=ASSETSPATH."/".$fetch_class.'/'.$fetch_class?>.js"></script>
+	
+		<script>
+			if (typeof(window["<?=$fetch_method?>"]) == "function"){
+				window["<?=$fetch_method?>"]();
+			}
+		</script>
+			
 	<?endif;?>
 
 </body>
