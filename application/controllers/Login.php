@@ -14,5 +14,24 @@ class Login extends MY_Controller {
     $arr = ($mem) ? array('result'=>true) : array('result'=>false);
     echo json_encode($arr);
   }
+
+  function normal_join() {
+    $input = $this->input->post();
+    $input['mem_type'] = "normal";
+
+    $create_options  = array(
+      "input"    => $input,
+      "table"    => "member",
+      "prefix"  => "mem",
+    );
+    $data = $this->common->create($create_options);
+
+    if ($data) {
+      $_SESSION['mem_idx'] = $data[0]->mem_idx;
+      $_SESSION['mem_name'] = $data[0]->mem_name;
+      redirect('http://localhost.trip_php/');
+    }
+
+  }
 }
 ?>

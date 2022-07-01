@@ -1,20 +1,34 @@
 function join () {
-  var passwordFlag = true;
-  var passwordckFlag = true;
+  var passwordFlag = false;
+  var passwordckFlag = false;
   var reqFlag = true;
+  var idFlag = false;
 
   $(document).on("click", ".joinButton", function (e) {
+    e.preventDefault();
+    var $self = $(this);
+    var $form = $('form');
+  
     $(".req").each(function(idx, elem) {
       if (!$(elem).val()) {
         $(elem).next().show();
         reqFlag = false;
+        return false;
       } else {
         $(elem).next().hide();
+        reqFlag = true;
       }
     });
 
-    if (reqFlag && passwordFlag && passwordckFlag) {
-      $('form').submit();
+    console.log(reqFlag);
+    console.log(passwordFlag);
+    console.log(passwordckFlag);
+    console.log(idFlag);
+    if (reqFlag && passwordFlag && passwordckFlag && idFlag) {
+      if ($self.data("action")) {
+        $form.prop("action", $self.data("action"));
+      }
+      $form.submit();
     }
 
   });
@@ -22,6 +36,12 @@ function join () {
   $(document).on("keyup", "#mem_id", function (e) {
     var mem_id = $(this).val();
     var $this = $(this);
+    
+    if (!$this.val()) {
+      $this.next().text('아이디를 입력해주세요.');
+      $this.next().show();
+      return false;
+    }
 
     $.ajax({
       type: "POST",
@@ -31,9 +51,12 @@ function join () {
       success: function (data, textStatus, jqXH) {
         var obj = $.parseJSON(data);
         if (obj.result == true) {
+          $this.next().text('중복된 아이디가 있습니다.');
           $this.next().show();
+          idFlag = false;
         } else {
           $this.next().hide();
+          idFlag = true;
         }
       }
     });
@@ -71,6 +94,7 @@ function join () {
   
   $(document).on("change", ".mem_phone", function (e) {
     var Flag = true;
+    var phone_text = '';
     $(".mem_phone").each(function(idx, elem) {
       if (!$(elem).val()) {
         Flag = false;
@@ -79,21 +103,27 @@ function join () {
       if ($(elem).hasClass('number') && ($(elem).val().length != 4)) {
         Flag = false;
       }
+      (phone_text != '') ? phone_text += '-' : '';
+      phone_text += $(elem).val();
     });
 
     (!Flag) ? $('.mem_phone').next().show() : $('.mem_phone').next().hide();
+    $('[name="mem_phone"]').val(phone_text);
   });
 
   $(document).on("change", ".mem_email", function (e) {
-    console.log('ee');
     var Flag = true;
+    var email_text = '';
     $(".mem_email").each(function(idx, elem) {
       if (!$(elem).val()) {
         Flag = false;
         return false;
       }
+      email_text += $(elem).val();
+
     });
     (!Flag) ? $('.mem_email').next().show() : $('.mem_email').next().hide();
+    $('[name="mem_email"]').val(email_text);
 
   });
   
