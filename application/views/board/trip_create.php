@@ -1,7 +1,7 @@
 <div class="container">
   <main>
     <div class="g-5 py-5">
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation form" novalidate="">
           <div class="row g-3">
 
             <div class="col-md-6">
@@ -32,6 +32,7 @@
               <div class="invalid-feedback">내용을 입력해주세요</div>
             </div>
 
+            <input type="file" id="file" class="form-control col-md-7 col-xs-12" name="image">
           </div>
 
           <hr class="my-4">

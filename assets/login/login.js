@@ -20,10 +20,6 @@ function join () {
       }
     });
 
-    console.log(reqFlag);
-    console.log(passwordFlag);
-    console.log(passwordckFlag);
-    console.log(idFlag);
     if (reqFlag && passwordFlag && passwordckFlag && idFlag) {
       if ($self.data("action")) {
         $form.prop("action", $self.data("action"));
