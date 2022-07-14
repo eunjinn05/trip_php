@@ -19,6 +19,8 @@ function uploadFile(e) {
     contentType : false,
     processData : false,
     success: function (data) {
+      var obj = $.parseJSON(data);
+      $(currentTarget).next().val(obj.data[0]);
     }
   });
 }

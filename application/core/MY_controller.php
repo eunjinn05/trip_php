@@ -9,13 +9,13 @@ class MY_Controller extends CI_Controller {
   =================================================*/
   function __construct() {
     parent::__construct();
+    $this->data = get_router();
   }
 
   function loadView($skin, $data) {
     if( is_null($skin) ) $skin = MAIN_LAYOUT;
+    (!$data) ? $data = array() : '';
 
-    // var_dump($data); exit;
-    $this->data = get_router();
     $data = array_merge($data, $this->data);
     $this->load->view($skin, $data);
   }

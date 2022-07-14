@@ -13,7 +13,8 @@ function review_write () {
         var obj = $.parseJSON(data);
         var html = '';
         for(var i=0; i < obj.bcat.length; i++) {
-          html += '<option value="'+obj.bcat[i].bcat_idx+'">'+obj.bcat[i].bcat_title+'</option>';
+          var selected = (i==0) ? 'selected' : '';
+          html += '<option '+selected+' value="'+obj.bcat[i].bcat_idx+'">'+obj.bcat[i].bcat_title+'</option>';
         } 
         $('#country').html(html);
       }
@@ -21,9 +22,15 @@ function review_write () {
   });
 
   $(document).on("click", "#writeBtn", function (e) {
+    var $this = $(this);
     var content = CKEDITOR.instances.content.getData();
-    $('[name="content"]').val(content);
-
+    $('[name="br_content"]').val(content);
+    
+    if ($this.data("action")) {
+      $('.form').prop("action", $this.data("action"));
+      $('.form').prop("method", $this.data("method"));
+    }
+    $('.form').submit();
   });
 
 }

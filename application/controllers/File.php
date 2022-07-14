@@ -46,7 +46,7 @@ class File extends MY_Controller {
           }
         }
         if ($array) {
-          $_POST[$k]=$array;
+          echo json_encode(array('data'=>$array));
         }
       }
     }
@@ -64,7 +64,7 @@ class File extends MY_Controller {
            $this->img_limit_resize($target_file, 600);
           }
         }
-        return $filename;
+        return $target_file;
       }
     }
 	    return false;
