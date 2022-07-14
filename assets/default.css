@@ -92,3 +92,18 @@ body {
 .hide {
   display : none;
 }
+
+.rounded-circle {
+  height : 140px;
+}
+
+.bcat_title {
+  font-size: 19px;
+  margin-top : 3px;
+  margin-bottom: 7px;
+}
+
+.comment {
+  font-size: 15px;
+  margin-bottom: 7px;
+}

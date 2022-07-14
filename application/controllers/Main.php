@@ -20,7 +20,10 @@ class Main extends MY_Controller {
 	 */
 
 	public function index() {
-		$this->loadView(null, null);
+    $this->load->model("board_model");
+    $data['main_category1'] = $this->board_model->get_category(0);
+		$data['main_category2'] = $this->board_model->get_category(1);
+		$this->loadView(null, $data);
 	}
 
 	public function setting_page() {
