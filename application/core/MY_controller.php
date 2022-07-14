@@ -14,8 +14,10 @@ class MY_Controller extends CI_Controller {
   function loadView($skin, $data) {
     if( is_null($skin) ) $skin = MAIN_LAYOUT;
 
+    // var_dump($data); exit;
     $this->data = get_router();
-    $this->load->view($skin, $this->data);
+    $data = array_merge($data, $this->data);
+    $this->load->view($skin, $data);
   }
 
   function load404() {

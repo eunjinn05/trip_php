@@ -91,7 +91,7 @@ $autoload['drivers'] = array();
 */
 // $autoload['helper'] = array();
 
-$autoload['helper'] = array('common', 'url');
+$autoload['helper'] = array('common', 'board');
 
 /*
 | -------------------------------------------------------------------

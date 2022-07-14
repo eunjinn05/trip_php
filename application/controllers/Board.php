@@ -7,10 +7,14 @@ class Board extends MY_Controller {
     $this->load->model("board_model");
   }
 
-  function aaa() {
-
-    $this->board_model->func();
-
+  function review_write() {
+    $data['bcat'] = $this->board_model->get_category(0);
+		$this->loadView(null, $data);
+  }
+  
+  function get_category($bcat_depth, $bcat_parent) {
+    $bcat = $this->board_model->get_category($bcat_depth, $bcat_parent);
+    echo json_encode(array('bcat'=>$bcat));
   }
 }
 ?>
