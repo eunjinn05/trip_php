@@ -12,4 +12,9 @@ class Board_model extends CI_Model {
     return $bcat = $CI->db->get("board_category")->result();
   }
 
+  function get_banner() {
+    $CI =& get_instance();
+    return $bcat = $CI->db->get("main_banner")->result();
+
+  }
 }

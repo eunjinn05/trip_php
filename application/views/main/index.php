@@ -1,38 +1,30 @@
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
+      <?for($i=0; $i<count($main_banner); $i++) : $class=''; $current='';?>
+        <?if ($i==0) :
+          $class='active'; $current='true';
+          endif;?>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="<?=$i?>" class="<?=$class?>" <??> aria-current="<?=$current?>"></button>
+      <?endfor;?>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item">
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
+    <?for($i=0; $i<count($main_banner); $i++) : $class=''; $active='';
+        if ($i==0) :
+          $class='text-start';
+          $active='active';
+        elseif($i == count($main_banner)-1) :
+          $class='text-end';
+        endif;?>
 
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+        <div class="carousel-item <?=$active?>" style="background-image : url('<?=$main_banner[$i]->mb_image?>')">
+          <div class="container">
+            <div class="carousel-caption <?=$class?>">
+              <h1 class="slideTitle"><?=$main_banner[$i]->mb_title?></h1>
+              <p class="slideContent"><?=$main_banner[$i]->mb_content?></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="carousel-item active">
-
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-          </div>
-        </div>
+      <?endfor;?>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">

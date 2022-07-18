@@ -78,6 +78,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'Sung952812!',
+	// 'password' => 'dmswls12',
 	'database' => 'trip_php',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

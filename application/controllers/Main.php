@@ -23,6 +23,7 @@ class Main extends MY_Controller {
     $this->load->model("board_model");
     $data['main_category1'] = $this->board_model->get_category(0);
 		$data['main_category2'] = $this->board_model->get_category(1);
+		$data['main_banner'] = $this->board_model->get_banner();
 		$this->loadView(null, $data);
 	}
 

@@ -16,7 +16,7 @@
     </div>
 
     <div class="mb-3">
-      <p><a>회원가입</a> / <a>아이디 찾기</a>/ <a>비밀번호 찾기</a></p>
+      <p><a href="/login/join">회원가입</a> / <a>아이디 찾기</a>/ <a>비밀번호 찾기</a></p>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
   </form>
