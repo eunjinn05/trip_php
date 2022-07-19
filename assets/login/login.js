@@ -26,7 +26,6 @@ function join () {
       }
       $form.submit();
     }
-
   });
 
   $(document).on("keyup", "#mem_id", function (e) {
@@ -38,7 +37,6 @@ function join () {
       $this.next().show();
       return false;
     }
-
     $.ajax({
       type: "POST",
       async: false,
@@ -122,14 +120,33 @@ function join () {
     $('[name="mem_email"]').val(email_text);
 
   });
-  
-
 
   $(document).on("keydown", ".mem_phone", function (e) {
     if ((e.key >= 0 && e.key <= 9) || e.key == "Backspace") {
       return true;
     } else {
       return false;
+    }
+  });
+
+}
+
+function login() {
+  $(document).on("click", ".loginButton", function (e) {
+    var $this = $(this);
+    var action = $this.data('action');
+    $('form').attr('action', action);
+
+    var flag = true;
+    $(".req").each(function(idx, elem) {
+      if (!$(elem).val()) {
+        alert('아이디와 비밀번호 모두 입력해주세요.');
+        flag = false;
+        return false;
+      }
+    });
+    if (flag) {
+      $('form').submit();
     }
   });
 

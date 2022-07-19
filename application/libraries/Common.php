@@ -10,7 +10,6 @@ class Common {
     $this->CI =& get_instance();
   }
 
-
   public function create($option) {
     $CI = $this->CI;
 
@@ -92,4 +91,58 @@ class Common {
   }
 
 
+  public function select($option=array()) {
+    $CI  = $this->CI;
+
+    /////#####===== 옵션 설정 =====#####/////
+    $tmp_options  = array(
+      "table"   => "",
+      "prefix"  => @$option["prefix"]?:($option["table"]?explode("_", get_table_pk($option["table"]))[0]:""),   //테이블 prefix
+      "pkval"   => "", 
+      "select"  => "*",
+      "join"    => ""?:array(),
+      "where"   => "",
+      "group"   => "",
+      "having"   => "",
+    );
+
+    $options  = array_merge($tmp_options, $option);
+
+    @extract($options);
+
+    /////#####===== 주키 설정 =====#####/////
+    $pk      = @$pk?:(@$prefix?$prefix."_idx":get_table_pk($table));
+    $pk_value  = @$pkval?:@$input[$pk]?:$this->CI->input->post($pk, TRUE);
+
+    /////#####===== DB Query 설정 =====#####/////
+    //##### 조인 설정 #####//
+    if (@count($join) > 0) {
+      foreach($join as $key=>$val) {
+        $CI->db->join($val[0], $val[1], $val[2]);
+      }
+    }
+
+    //##### 조건 설정 #####//
+    if ($where) {
+      $CI->db->where($where);
+    } else {
+      $CI->db->where(array($pk=>$pk_value));
+    }
+
+    //##### 그룹 설정 #####//
+    if ($group) {
+      $CI->db->group_by($group);
+    }
+
+    //##### having 설정 #####//
+    if ($having) {
+      $CI->db->having($having);
+    }
+
+    /////#####===== 결과 설정 =====#####/////
+    //##### View #####//
+    $data["view"]  = $CI->db->get($table)->row();
+
+    return $data;
+  }
 }

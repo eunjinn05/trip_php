@@ -31,7 +31,27 @@ class Login extends MY_Controller {
       $_SESSION['mem_name'] = $data[0]->mem_name;
       redirect('http://localhost.trip_php/');
     }
+  }
 
+  function normal_login() {
+    $input = $this->input->post();
+    $this->db->where("mem_id", $input["mem_id"]);
+    $this->db->where("mem_type", 'normal');
+    $mem = $this->db->get("member")->row();
+    var_dump($mem);
+
+    if ($mem) {
+      if( $mem->mem_password == hash("sha512", $input['mem_password']) ) {
+        $_SESSION['mem_idx'] = $mem->mem_idx;
+        $_SESSION['mem_name'] = $mem->mem_name;
+
+        redirect(DIRECTORY);
+      } else {
+        alert('비밀번호를 확인하세요', DIRECTORY.'/login/login');
+      }
+    } else {
+      alert('아이디를 확인하세요', DIRECTORY.'/login/login');
+    }
   }
 }
 ?>

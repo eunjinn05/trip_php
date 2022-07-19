@@ -35,4 +35,33 @@ if ( ! function_exists('get_table_pk')) {
     }
   }
   
+if ( ! function_exists('alert')) {
+  /*=================================================
+      Alert 창
+  =================================================*/
+  function alert($msg="", $url="", $historyback = false) {
+    $CI =& get_instance();
+
+    if($msg) {
+      $CI->session->set_tempdata('alert_msg', json_encode($msg), 10);
+    }
+
+    if($url) {
+      redirect($url);
+    } else{
+      $url = $CI->agent->referrer();
+      if( $url && !$historyback ) {
+        redirect($url, 'refresh');
+      } else {
+        echo "<script type='text/javascript'>";   
+
+
+        echo "history.go(-1);";
+        echo "</script>";
+      }
+
+    }
+  }
+}
+
 ?>

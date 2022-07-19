@@ -87,3 +87,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 defined('MAIN_LAYOUT')      OR define('MAIN_LAYOUT', 'default.php');
 defined('VIEWPATH')      OR define('VIEWPATH', 'application/views');
 defined('ASSETSPATH')      OR define('ASSETSPATH', 'assets');
+defined('DIRECTORY')      OR define('DIRECTORY', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST']);

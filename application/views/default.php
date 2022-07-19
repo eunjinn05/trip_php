@@ -28,6 +28,11 @@
 	
 		<div class="defaultdiv">
 			<? include $fetch_views;?>
+
+		<? if (@is_file(VIEWPATH."/popup.php")) :
+				include VIEWPATH."/popup.php";
+			endif; ?>
+
 		<? if (@is_file(VIEWPATH."/footer.php")) :
 				include VIEWPATH."/footer.php";
 			endif; ?>
