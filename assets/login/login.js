@@ -150,4 +150,15 @@ function login() {
     }
   });
 
+  $(document).on("click", "#kakao", function (e) {
+    Kakao.init('465faf0835fa28b694f7e9f6c5d4b062');
+    Kakao.Auth.authorize({
+      redirectUri: 'http://localhost.trip_php/login/kakao_login'
+    });
+  });
+
+}
+
+function kakao_login () {
+  
 }

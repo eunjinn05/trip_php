@@ -53,5 +53,31 @@ class Login extends MY_Controller {
       alert('아이디를 확인하세요', DIRECTORY.'/login/login');
     }
   }
+  
+  function kakao_login() {
+    $url = 'https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=fa96067c8cb2bed84a268007831d5897&code='.$_GET['code'];
+    $fields = array(
+      'grant_type' => 'authorization_code',
+      'client_id' => 'fa96067c8cb2bed84a268007831d5897',
+      'redirect_uri' => 'http://localhost.trip_php/login/kakao_login',
+      'code' => $_GET['code']
+    );
+    $headers = array(
+      'Content-Type: application/x-www-form-urlencoded'
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+    $result = curl_exec($ch);
+    curl_close($ch);
+    var_dump($result);
+
+  }
 }
 ?>

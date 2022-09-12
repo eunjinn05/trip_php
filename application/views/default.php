@@ -46,7 +46,8 @@
 				window["<?=$fetch_method?>"]();
 			}
 		</script>
-			
+		<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 	<?endif;?>
 
 </body>
